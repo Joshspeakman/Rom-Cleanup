@@ -174,18 +174,47 @@ class ROMAnalyzer:
             # Comic book/superhero terms
             r'\bspider.?man\b', r'\bvenom\b', r'\bcarnage\b', r'\blethal\b',
             r'\bsuperman\b', r'\bbatman\b', r'\bx.?men\b', r'\bavengers\b',
+            r'\bmarvel\b', r'\bdc comics\b', r'\bwolverine\b', r'\bhulk\b',
+            r'\bcaptain america\b', r'\biron man\b', r'\bjustice league\b',
 
             # Sci-fi/space terms
             r'\bstar trek\b', r'\bstarfleet\b', r'\bbridge simulator\b',
             r'\bstar wars\b', r'\benterprise\b', r'\bstarship\b',
+            r'\balien\b', r'\bspace\b.*\binvaders\b', r'\bgalaga\b',
+
+            # Sports/racing games (might have "cards" or "deck")
+            r'\bskateboard\b', r'\bskate\b', r'\bsnowboard\b',
+            r'\bsurf\b', r'\brace\b(?!.*casino)', r'\btrack\b(?!.*casino)',
+            r'\bfootball\b', r'\bbaseball\b', r'\bbasketball\b', r'\bhockey\b',
+
+            # RPG/strategy terms (card-based games that aren't gambling)
+            r'\bpokemon\b', r'\bdigimon\b', r'\byu-gi-oh\b', r'\bmagic the gathering\b',
+            r'\bduel\b.*\bmasters\b', r'\bcard\b.*\bbattle\b', r'\btcg\b', r'\bccg\b',
+
+            # Adventure/puzzle games
+            r'\bsolitaire\b(?!.*casino)', r'\bpyramid\b(?!.*casino)',
+            r'\bmario\b', r'\bzelda\b', r'\bkirby\b', r'\byoshi\b',
+            r'\bsonic\b', r'\bmegaman\b', r'\bmega man\b', r'\bcastlevania\b',
+            r'\bmetroid\b', r'\bfinal fantasy\b', r'\bdragon quest\b',
 
             # Action/adventure terms that might conflict
             r'\bbridge\b(?!.*casino)', # "bridge" card game vs "starship bridge"
             r'\bboat\b(?!.*casino)', # Exclude unless specifically casino boat
+            r'\bchip\b(?!.*casino)', # Computer chips, not casino chips
+            r'\bslot\b(?!.*machine)', # Time slots, expansion slots, not slot machines
+
+            # Board games that aren't gambling
+            r'\bmonopoly\b', r'\brisk\b(?!.*casino)', r'\bscrabble\b',
+            r'\bchess\b', r'\bcheckers\b', r'\bgo\b(?!.*casino)',
 
             # Game show context (not gambling)
             r'\bwheel of fortune\b.*\bgame show\b',
-            r'\bjeopardy\b', r'\bfamily feud\b',
+            r'\bjeopardy\b', r'\bfamily feud\b', r'\bprice is right\b',
+            r'\bgame show\b', r'\btrivia\b(?!.*casino)',
+
+            # Fighting games (might use "deck" in different context)
+            r'\bstreet fighter\b', r'\bmortal kombat\b', r'\btekken\b',
+            r'\bking of fighters\b', r'\bsamurai shodown\b',
         ]
 
         # Adult game detection patterns
