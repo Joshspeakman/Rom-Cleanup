@@ -5,48 +5,46 @@ A powerful Python-based ROM collection organizer with intelligent duplicate dete
 [![Python 3.7+](https://img.shields.io/badge/python-3.7+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## 📋 Table of Contents
+## Table of Contents
 
-- [Features](#-features)
-- [Installation](#-installation)
-- [Quick Start](#-quick-start)
-- [Configuration](#-configuration)
-- [Usage Guide](#-usage-guide)
+- [Features](#features)
+- [Installation](#installation)
+- [Quick Start](#quick-start)
+- [Usage Guide](#usage-guide)
   - [Recommended Cleanup](#recommended-cleanup)
   - [Advanced Options](#advanced-options)
-- [Region Detection](#-region-detection)
-- [Special Version Detection](#-special-version-detection)
-- [Format Preference](#-format-preference)
-- [Folder-Based Games](#-folder-based-games)
-- [Supported Systems](#-supported-systems)
-- [Command Line Options](#-command-line-options)
-- [FAQ](#-faq)
-- [Contributing](#-contributing)
-- [License](#-license)
+- [Region Detection](#region-detection)
+- [Special Version Detection](#special-version-detection)
+- [Format Preference](#format-preference)
+- [Folder-Based Games](#folder-based-games)
+- [Supported Systems](#supported-systems)
+- [Command Line Options](#command-line-options)
+- [FAQ](#faq)
+- [Contributing](#contributing)
+- [License](#license)
 
-## 🌟 Features
+## Features
 
 ### Core Functionality
 
-- **🎯 Smart Duplicate Detection**: Identifies duplicate ROMs across different regions, versions, and formats
-- **🌍 Region-Based Organization**: Automatically sorts ROMs by region (USA, Europe, Japan, World, etc.)
-- **📊 Priority-Based Sorting**: Multi-region ROMs are sorted by configurable priority (default: USA > World > Europe > Japan)
-- **💾 Format Intelligence**: Keeps best format based on compression, save file presence, and format quality
-- **🎮 Special Version Handling**: Detects and manages Beta, Proto, Alpha, Demo, Hack, and Translation versions
-- **📁 Folder Game Support**: Handles multi-disc CD games and arcade games (CHD, CUE/BIN sets) as complete units
-- **🔍 Comprehensive Analysis**: Detailed statistics on your ROM collection before any operations
+- **Smart Duplicate Detection**: Identifies duplicate ROMs across different regions, versions, and formats
+- **Region-Based Organization**: Automatically sorts ROMs by region (USA, Europe, Japan, World, etc.)
+- **Priority-Based Sorting**: Multi-region ROMs are sorted by configurable priority (default: USA > World > Europe > Japan)
+- **Format Intelligence**: Keeps best format based on compression, save file presence, and format quality
+- **Special Version Handling**: Detects and manages Beta, Proto, Alpha, Demo, Hack, and Translation versions
+- **Folder Game Support**: Handles multi-disc CD games and arcade games (CHD, CUE/BIN sets) as complete units
+- **Comprehensive Analysis**: Detailed statistics on your ROM collection before any operations
 
 ### Advanced Features
 
-- **📈 Version Detection**: Identifies and manages different versions of the same ROM
-- **🎰 Content Filtering**: Automatically detects and organizes casino and adult content games
-- **💬 Translation Detection**: Identifies fan translations and unofficial English patches
-- **🎨 Visual Interface**: Colorful, easy-to-read terminal UI with box-drawing characters
-- **⚙️ Configurable Settings**: Extensive customization via `config.ini`
-- **🔒 Safe Operations**: Non-destructive moves to review folders before permanent deletion
-- **📝 Detailed Logging**: Complete operation logs for audit trails
+- **Version Detection**: Identifies and manages different versions of the same ROM
+- **Content Filtering**: Automatically detects and organizes casino and adult content games
+- **Translation Detection**: Identifies fan translations and unofficial English patches
+- **Visual Interface**: Colorful, easy-to-read terminal UI with box-drawing characters
+- **Safe Operations**: Non-destructive moves to review folders before permanent deletion
+- **Detailed Logging**: Complete operation logs for audit trails
 
-## 📦 Installation
+## Installation
 
 ### Prerequisites
 
@@ -63,13 +61,7 @@ A powerful Python-based ROM collection organizer with intelligent duplicate dete
 
 2. **No dependencies required!** The script uses only Python standard library modules.
 
-3. **Optional: Create configuration file**:
-   ```bash
-   # The script will create config.ini on first run with default settings
-   python rom_cleanup.py
-   ```
-
-## 🚀 Quick Start
+## Quick Start
 
 1. **Place the script in your ROM directory**:
    ```
@@ -90,47 +82,7 @@ A powerful Python-based ROM collection organizer with intelligent duplicate dete
 
 4. **Review organized files** in region-specific folders (Europe/, Japan/, etc.)
 
-## ⚙️ Configuration
-
-The script creates a `config.ini` file with customizable settings:
-
-### config.ini Structure
-
-```ini
-[VERSION_HANDLING]
-# Detect version numbers in ROM filenames
-detect_versions = true
-
-# Action for older versions: delete, review, or keep
-older_version_action = review
-
-[REGION_PRIORITY]
-# Priority order for multi-region ROMs (highest to lowest)
-priority_order = USA, World, Europe, Japan
-
-[SCANNING]
-# Scan subdirectories (false = parent folder only, safer)
-scan_subfolders = false
-
-# Folders to exclude from scanning (comma-separated)
-excluded_folders = ROM_DELETE, ROM_REVIEW, Adult, Casino, Beta-Proto, Europe, Japan, World, Asia, Australia, Brazil, Canada, China, France, Germany, Italy, Korea, Netherlands, Spain, Sweden, Taiwan, UK
-
-[OUTPUT]
-# Log file location
-log_file = rom_cleanup_log.txt
-```
-
-### Key Settings Explained
-
-| Setting | Description | Default |
-|---------|-------------|---------|
-| `detect_versions` | Enable version detection (v1.0, Rev A, etc.) | `true` |
-| `older_version_action` | What to do with older versions | `review` |
-| `priority_order` | Region priority for multi-region ROMs | `USA, World, Europe, Japan` |
-| `scan_subfolders` | Recursively scan subdirectories | `false` |
-| `excluded_folders` | Folders to skip during scanning | See config.ini |
-
-## 📖 Usage Guide
+## Usage Guide
 
 ### Recommended Cleanup
 
@@ -201,7 +153,7 @@ The **Advanced Options** menu provides granular control:
 - **Remove this script**: Clean exit - removes script file
 - **Toggle scanning mode**: Switch between parent folder only / recursive subfolder scanning
 
-## 🌍 Region Detection
+## Region Detection
 
 ### Supported Regions
 
@@ -246,7 +198,7 @@ Primary Region: Europe (highest priority between the two)
 Action: Moved to Europe/ folder
 ```
 
-## 🎮 Special Version Detection
+## Special Version Detection
 
 ### Detected Special Versions
 
@@ -283,7 +235,7 @@ Patterns detected:
 
 **Note**: The script distinguishes between language codes and regions to avoid false positives.
 
-## 💾 Format Preference
+## Format Preference
 
 ### Format Ranking System
 
@@ -342,7 +294,7 @@ Super Mario Bros.srm          (Save file detected!)
 ✓ Keep: Super Mario Bros.srm
 ```
 
-## 📁 Folder-Based Games
+## Folder-Based Games
 
 ### What Are Folder-Based Games?
 
@@ -388,7 +340,7 @@ Folder-based games are **moved as complete folders** to region-specific location
 
 Folder game options **only appear** if folder-based games are detected in your collection. This keeps the interface clean when not needed.
 
-## 🎯 Supported Systems
+## Supported Systems
 
 The tool supports **100+ gaming platforms**:
 
@@ -501,7 +453,7 @@ The tool supports **100+ gaming platforms**:
 
 **Supported extensions**: Over 200 file formats including .nes, .sfc, .md, .gb, .gba, .n64, .nds, .3ds, .iso, .chd, .cue, .bin, .zip, .7z, and many more.
 
-## 💻 Command Line Options
+## Command Line Options
 
 ### Basic Usage
 
@@ -538,7 +490,7 @@ python rom_cleanup.py --dry-run --cleanup recommended
 python rom_cleanup.py --verbose
 ```
 
-## ❓ FAQ
+## FAQ
 
 ### General Questions
 
@@ -551,9 +503,6 @@ A: All moved files are in organized folders. Simply move them back to the main d
 **Q: Does this work on Windows/Mac/Linux?**
 A: Yes! The script is cross-platform and uses Python's standard library.
 
-**Q: Can I customize which regions to keep?**
-A: Yes! Edit `config.ini` and change the `priority_order` setting.
-
 **Q: Will this corrupt my ROMs?**
 A: No! The script only moves files, it never modifies ROM data.
 
@@ -562,18 +511,11 @@ A: No! The script only moves files, it never modifies ROM data.
 **Q: Why aren't my ROMs being detected?**
 A: Check that:
 - File extensions are recognized (see Supported Systems)
-- If files are in subfolders, enable `scan_subfolders = true` in config.ini
-- Files aren't in excluded folders (check `excluded_folders` setting)
+- If files are in subfolders, toggle scanning mode in the menu to include subfolders
+- Files aren't in excluded folders
 
 **Q: Why did it keep the .zip instead of the .nes file?**
 A: The .zip file likely has an associated save file (.srm). The script prioritizes formats with save data to prevent save game loss.
-
-**Q: How do I change region priority?**
-A: Edit `config.ini`:
-```ini
-[REGION_PRIORITY]
-priority_order = Europe, USA, Japan, World
-```
 
 **Q: Can I run this on my entire ROM collection at once?**
 A: Yes, but we recommend:
@@ -603,7 +545,7 @@ A: Yes:
 - **Save files** (.srm, .sav): In-game saves, preserved with ROM
 - **Save states** (.st0-.st9): Emulator snapshots, also preserved
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Here's how you can help:
 
@@ -646,7 +588,7 @@ python test_rom_cleanup.py
 python rom_cleanup.py
 ```
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
@@ -674,20 +616,18 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Thanks to the No-Intro, TOSEC, and Redump communities for ROM naming standards
 - Inspired by ROM organization needs of retro gaming enthusiasts
-- Built with ❤️ for the emulation community
+- Built for the emulation community
 
-## 📞 Support
+## Support
 
 - **Issues**: [GitHub Issues](https://github.com/joshspeakman/rom-cleanup/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/joshspeakman/rom-cleanup/discussions)
 - **Wiki**: [GitHub Wiki](https://github.com/joshspeakman/rom-cleanup/wiki)
 
 ---
-
-**⭐ If you find this tool useful, please consider giving it a star on GitHub!**
 
 *Last updated: 2025-09-30*
