@@ -217,33 +217,56 @@ class ROMAnalyzer:
             r'\bking of fighters\b', r'\bsamurai shodown\b',
         ]
 
-        # Adult game detection patterns
+        # Adult game detection patterns - EXPLICIT PORNOGRAPHIC CONTENT ONLY
+        # Note: This targets "Adults Only" (AO) rated games and pornographic titles,
+        # NOT "Mature" (M) rated games like GTA, Mortal Kombat, etc.
         self.adult_game_patterns = [
-            # Explicit adult terms
+            # Explicit pornographic terms
             r'\bhentai\b', r'\bporn\b', r'\bporno\b', r'\bxxx\b',
-            r'\badult\b', r'\berotic\b', r'\bsexy\b', r'\bnude\b', r'\bnaked\b',
-            r'\bbishoujo\b', r'\becchi\b', r'\bbishounen\b',
+            r'\berotic\b', r'\berotica\b',
 
-            # Japanese adult game terms
-            r'\beroges?\b', r'\bgalge\b', r'\botome\b', r'\bdating sim\b',
-            r'\bvisual novel\b.*\badult\b', r'\brenai\b',
+            # Adults Only rating (AO) - most explicit rating
+            r'\badults?\s*only\b', r'\b18\+\b', r'\bao\s*rated\b',
 
-            # Specific known adult titles/series (based on research)
+            # Japanese adult game terms (eroge/H-games)
+            r'\beroges?\b', r'\bh-game\b', r'\becchi\b',
+            r'\bbishoujo\b.*\b(erotic|adult|18\+)\b',
+
+            # Atari 2600 - Mystique/PlayAround titles
+            r'\bcuster\'?s?\s*revenge\b', r'\bwestward\s*ho\b',
+            r'\bbeat\s*\'?em\s*&\s*eat\s*\'?em\b', r'\bphilly\s*flasher\b',
+            r'\bbachelor\s*party\b', r'\bbachelorette\s*party\b',
+            r'\bjungle\s*fever\b', r'\bknight\s*on\s*the\s*town\b',
+            r'\bcathouse\s*blues\b', r'\bgigolo\b',
+
+            # NES - Panesian titles
+            r'\bbubble\s*bath\s*babes\b', r'\bmagic\s*bubble\b',
+            r'\bhot\s*slots\b', r'\bpeek-?a-?boo\s*poker\b',
+
+            # PC Engine/TurboGrafx CD - Shiawase Usagi series
+            r'\bshiawase\s*usagi\b', r'\bshinsetsu\s*shiawase\s*usagi\b',
+            r'\btoraware\s*usagi\b', r'\bnureta\s*bishoujo\b',
+
+            # PC-98/Console ports
+            r'\bsteam-?heart\'?s\b.*\b(pc.?98|pc.?engine)\b',
+
+            # AO-rated titles (notable console/multiplatform releases)
+            r'\bleisure\s*suit\s*larry\b.*\bmagna\s*cum\s*laude\b',
+            r'\bthe\s*guy\s*game\b', r'\bmanhunt\s*2\b.*\buncut\b',
+
+            # Specific known adult titles/series
             r'\bsuper\s+maruo\b', r'\bbishoujo\s+shashinkan\b', r'\bstudio\s+cut\b',
             r'\bbodycon quest\b', r'\babakareshi musume\b',
-            r'\bhoney peach\b', r'\bnight life\b', r'\bmidnight\b.*\blove\b',
+            r'\bhoney peach\b', r'\bnight life\b',
 
-            # Adult content descriptors
-            r'\bplayboy\b', r'\bpenthouse\b', r'\bhustler\b',
-            r'\bstriptease\b', r'\bstrip\b.*\bpoker\b', r'\blingerie\b',
+            # Explicit adult magazine brands
+            r'\bplayboy\b.*\b(mansion|screensaver|women)\b',
+            r'\bpenthouse\b', r'\bhustler\b',
+            r'\bstriptease\b', r'\bstrip\b.*\bpoker\b',
 
-            # Pattern indicators often found in adult titles
-            r'\b18\+\b', r'\badults? only\b', r'\bmature\b.*\bcontent\b',
+            # Explicit adult content indicators
             r'\bunlicensed\b.*\badult\b', r'\bhomebrew\b.*\badult\b',
-
-            # Common adult game naming patterns
-            r'\bgirls?\b.*\bunlocked\b', r'\bseduction\b', r'\btemptation\b',
-            r'\bforbidden\b.*\blove\b', r'\bpassion\b.*\bnight\b',
+            r'\badult\b.*\bunlicensed\b',
         ]
 
         # Adult game exclusion patterns - games that might match adult patterns but are NOT adult games
