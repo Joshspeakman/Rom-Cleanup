@@ -1,0 +1,6 @@
+# ROM Cleanup Tool - No external dependencies required
+# This tool uses only Python standard library modules
+
+# Development dependencies (optional)
+pytest>=7.0.0
+pytest-cov>=4.0.0
