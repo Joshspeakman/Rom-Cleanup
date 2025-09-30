@@ -57,8 +57,8 @@ A powerful Python-based ROM collection organizer with intelligent duplicate dete
 
 1. **Download the script**:
    ```bash
-   git clone https://github.com/joshspeakman/rom-cleanup-tool.git
-   cd rom-cleanup-tool
+   git clone https://github.com/joshspeakman/rom-cleanup.git
+   cd rom-cleanup
    ```
 
 2. **No dependencies required!** The script uses only Python standard library modules.
@@ -691,4 +691,5 @@ SOFTWARE.
 **⭐ If you find this tool useful, please consider giving it a star on GitHub!**
 
 *Last updated: 2025-09-30*
+
 
