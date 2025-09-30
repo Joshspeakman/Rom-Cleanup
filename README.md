@@ -636,8 +636,8 @@ Contributions are welcome! Here's how you can help:
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/rom-cleanup-tool.git
-cd rom-cleanup-tool
+git clone https://github.com/joshspeakman/rom-cleanup.git
+cd rom-cleanup
 
 # Run tests
 python test_rom_cleanup.py
@@ -682,14 +682,12 @@ SOFTWARE.
 
 ## 📞 Support
 
-- **Issues**: [GitHub Issues](https://github.com/yourusername/rom-cleanup-tool/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/rom-cleanup-tool/discussions)
-- **Wiki**: [GitHub Wiki](https://github.com/yourusername/rom-cleanup-tool/wiki)
+- **Issues**: [GitHub Issues](https://github.com/joshspeakman/rom-cleanup/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/joshspeakman/rom-cleanup/discussions)
+- **Wiki**: [GitHub Wiki](https://github.com/joshspeakman/rom-cleanup/wiki)
 
 ---
 
 **⭐ If you find this tool useful, please consider giving it a star on GitHub!**
 
 *Last updated: 2025-09-30*
-
-
