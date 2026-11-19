@@ -1193,17 +1193,30 @@ class ROMAnalyzer:
 
     def make_work_folder(self, folder):
         """Create a cleanup folder in the ROM folder, or say plainly why it can't be"""
-        try:
-            Path(folder).mkdir(exist_ok=True)
-        except OSError as e:
-            raise RuntimeError(
-                f"Can't create the '{folder}' folder in {Path.cwd()} ({e.strerror or e}).\n"
-                "The ROM folder has to be one you can write to. Extract the ROM collection and the script out of\n"
-                "any .zip first, keep them out of protected places such as Program Files or C:\\Windows, and if\n"
-                "Windows Security's 'Controlled folder access' is on, allow Python or use a folder outside\n"
-                "Documents/Desktop. Or point the script at the ROM folder: python rom_cleanup.py -d \"<ROM folder>\""
-            ) from e
-        return Path(folder)
+        import time
+        failed = self.__dict__.setdefault('_failed_folders', set())
+        if folder in failed: raise RuntimeError(f"no '{folder}' folder (see above)")
+        last = None
+        for attempt in range(10):
+            try:
+                Path(folder).mkdir(exist_ok=True)
+                return Path(folder)
+            except PermissionError as e:
+                # Windows: a folder just removed (with Explorer or a virus scanner looking at it) stays "delete
+                # pending" for a moment, and making it again fails with "Access is denied" (error 5) until it's gone
+                last = e
+                time.sleep(0.3)
+            except OSError as e:
+                last = e
+                break
+        failed.add(folder)
+        raise RuntimeError(
+            f"Can't create the '{folder}' folder in {Path.cwd()} ({last.strerror or last}).\n"
+            "The ROM folder has to be one you can write to. Extract the ROM collection and the script out of\n"
+            "any .zip first, keep them out of protected places such as Program Files or C:\\Windows, and if\n"
+            "Windows Security's 'Controlled folder access' is on, allow Python or use a folder outside\n"
+            "Documents/Desktop. Or point the script at the ROM folder: python rom_cleanup.py -d \"<ROM folder>\""
+        ) from last
 
     def create_folders(self):
         """Create delete and review folders if they don't exist"""
@@ -1248,6 +1261,7 @@ class ROMAnalyzer:
 
             if should_move:
                 try:
+                    self.make_work_folder(destination_folder)   # made when something goes into it
                     destination = Path(destination_folder) / rom_file.name
                     # Handle duplicate names in destination
                     counter = 1
@@ -1278,6 +1292,7 @@ class ROMAnalyzer:
 
             if should_move:
                 try:
+                    self.make_work_folder(destination_folder)   # made when something goes into it
                     destination = Path(destination_folder) / rom_file.name
                     # Handle duplicate names in destination
                     counter = 1
@@ -1304,6 +1319,7 @@ class ROMAnalyzer:
 
             if specials:  # If file has any special versions
                 try:
+                    self.make_work_folder(destination_folder)   # made when something goes into it
                     destination = Path(destination_folder) / rom_file.name
                     # Handle duplicate names in destination
                     counter = 1
@@ -1345,6 +1361,7 @@ class ROMAnalyzer:
                     for rom_file in rom_files_only:
                         if rom_file != best_rom:
                             try:
+                                self.make_work_folder(destination_folder)   # made when something goes into it
                                 destination = Path(destination_folder) / rom_file.name
                                 # Handle duplicate names in destination
                                 counter = 1
@@ -1512,6 +1529,7 @@ class ROMAnalyzer:
                     print(f"{Colors.GREEN}Created folder: {Colors.WHITE}{destination_folder}{Colors.RESET}")
 
                 try:
+                    self.make_work_folder(destination_folder)   # made when something goes into it
                     destination = Path(destination_folder) / rom_file.name
                     # Handle duplicate names in destination
                     counter = 1
@@ -1544,6 +1562,7 @@ class ROMAnalyzer:
                     print(f"{Colors.GREEN}Created folder: {Colors.WHITE}{destination_folder}{Colors.RESET}")
 
                 try:
+                    self.make_work_folder(destination_folder)   # made when something goes into it
                     destination = Path(destination_folder) / rom_file.name
                     # Handle duplicate names in destination
                     counter = 1
@@ -1593,6 +1612,7 @@ class ROMAnalyzer:
                         for rom_file in rom_files_only:
                             if rom_file != best_rom:
                                 try:
+                                    self.make_work_folder(destination_folder)   # made when something goes into it
                                     destination = Path(destination_folder) / rom_file.name
                                     # Handle duplicate names in destination
                                     counter = 1
@@ -1720,6 +1740,7 @@ class ROMAnalyzer:
                     print(f"{Colors.GREEN}Created folder: {Colors.WHITE}{destination_folder}{Colors.RESET}")
 
                 try:
+                    self.make_work_folder(destination_folder)   # made when something goes into it
                     destination = Path(destination_folder) / rom_file.name
                     # Handle duplicate names in destination
                     counter = 1
@@ -1935,8 +1956,9 @@ class ROMAnalyzer:
         has_folder_games = analysis_data.get('has_folder_games', False)
         folder_game_count = analysis_data.get('folder_game_count', 0)
 
-        # Create folders
-        delete_folder, review_folder = self.create_folders()
+        # The cleanup folders are made when a file is first moved into one (a collection with nothing to move gets
+        # none; and "clean up all folders" below can remove them while this menu is open)
+        delete_folder, review_folder = 'ROM_DELETE', 'ROM_REVIEW'
 
         while True:
             print(f"\n{Colors.CYAN}╔{'═'*68}╗{Colors.RESET}")
