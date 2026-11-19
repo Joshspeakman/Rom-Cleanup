@@ -9,6 +9,9 @@ import argparse
 from collections import defaultdict, Counter
 from pathlib import Path
 
+# The script's own file, resolved before main() moves into the ROM folder
+SCRIPT_PATH = Path(__file__).resolve()
+
 # ANSI Color Codes for terminal output
 class Colors:
     """ANSI color codes for enhanced terminal output"""
@@ -1188,11 +1191,25 @@ class ROMAnalyzer:
             'adult_games_count': adult_games_count
         }
 
+    def make_work_folder(self, folder):
+        """Create a cleanup folder in the ROM folder, or say plainly why it can't be"""
+        try:
+            Path(folder).mkdir(exist_ok=True)
+        except OSError as e:
+            raise RuntimeError(
+                f"Can't create the '{folder}' folder in {Path.cwd()} ({e.strerror or e}).\n"
+                "The ROM folder has to be one you can write to. Extract the ROM collection and the script out of\n"
+                "any .zip first, keep them out of protected places such as Program Files or C:\\Windows, and if\n"
+                "Windows Security's 'Controlled folder access' is on, allow Python or use a folder outside\n"
+                "Documents/Desktop. Or point the script at the ROM folder: python rom_cleanup.py -d \"<ROM folder>\""
+            ) from e
+        return Path(folder)
+
     def create_folders(self):
         """Create delete and review folders if they don't exist"""
         folders = ['ROM_DELETE', 'ROM_REVIEW']
         for folder in folders:
-            Path(folder).mkdir(exist_ok=True)
+            self.make_work_folder(folder)
         return folders
 
     def log_unknowns(self):
@@ -1676,7 +1693,7 @@ class ROMAnalyzer:
 
     def remove_script(self):
         """Remove the ROM cleanup script"""
-        script_path = Path(__file__)
+        script_path = SCRIPT_PATH
         try:
             script_path.unlink()
             print(f"ROM cleanup script '{script_path.name}' has been removed.")
@@ -1728,8 +1745,7 @@ class ROMAnalyzer:
         move the Europe version to ROM_DELETE folder.
         """
         moved_files = []
-        delete_folder = Path('ROM_DELETE')
-        delete_folder.mkdir(exist_ok=True)
+        delete_folder = self.make_work_folder('ROM_DELETE')
 
         # Group files by base name
         base_names = defaultdict(list)
@@ -2727,8 +2743,16 @@ def main():
 
     analyzer = ROMAnalyzer()
 
+    # Work inside the ROM folder: ROM_DELETE, ROM_REVIEW and the region, Casino and Adult folders are made there,
+    # not in whatever folder the script happened to be started from
+    rom_dir = Path(args.directory).expanduser().resolve()
+    if not rom_dir.is_dir():
+        print(f"{Colors.RED}Directory {rom_dir} does not exist!{Colors.RESET}")
+        return
+    os.chdir(rom_dir)
+
     # Analyze specified directory
-    analysis_data = analyzer.analyze_directory(args.directory)
+    analysis_data = analyzer.analyze_directory('.')
 
     if analysis_data and analysis_data['rom_files']:
         # Log any unknown regions/specials

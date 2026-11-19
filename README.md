@@ -83,6 +83,13 @@ A powerful Python-based ROM collection organizer with intelligent duplicate dete
 
 4. **Review organized files** in region-specific folders (Europe/, Japan/, etc.)
 
+Or leave the script where it is and name the ROM folder: `python rom_cleanup.py -d "D:\ROMs\Mega Drive"`. Every folder
+the script makes (`ROM_DELETE`, `ROM_REVIEW`, `Europe`, ...) goes inside that ROM folder.
+
+**"Access is denied" (Windows) or "Permission denied":** the ROM folder can't be written to. Extract the ROMs and the
+script out of any `.zip` first, keep them out of protected places such as `Program Files`, and if Windows Security's
+*Controlled folder access* is on, allow Python or use a folder outside Documents/Desktop.
+
 ## Usage Guide
 
 ### Recommended Cleanup
