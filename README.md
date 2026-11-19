@@ -628,6 +628,12 @@ SOFTWARE.
 - **Discussions**: [GitHub Discussions](https://github.com/joshspeakman/rom-cleanup/discussions)
 - **Wiki**: [GitHub Wiki](https://github.com/joshspeakman/rom-cleanup/wiki)
 
+## Support
+
+If you get some use out of this, you can buy me a coffee on Ko-fi.
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/speakerjosh)
+
 ---
 
 *Last updated: 2025-09-30*
